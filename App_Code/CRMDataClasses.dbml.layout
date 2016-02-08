@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 47.75" name="CRMDataClasses">
+  <DataContextMoniker Name="/CRMDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="2ece8275-7033-4354-83d1-2287027486ca" absoluteBounds="1.625, 0.875, 2, 46.577130533854167">
+      <DataClassMoniker Name="/CRMDataClassesDataContext/FilteredAccount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7de4b0e0-79cd-4df9-9f44-f862a096e63e" absoluteBounds="1.6400000000000001, 1.335, 1.9700000000000002, 46.017130533854164" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

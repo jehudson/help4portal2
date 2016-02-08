@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="support2" Class="Support2DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=annatto.help4it.local\annatto;Initial Catalog=support2;User ID=help4base" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="support2ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.OrganisationDetails" Member="OrganisationDetails">
+    <Type Name="OrganisationDetail">
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountIdName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OrganisationDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Inactive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="OrganisationDetail_Site" Member="Sites" ThisKey="OrganisationID" OtherKey="OrganisationID" Type="Site" />
+      <Association Name="SecurityAssociation_OrganisationDetail" Member="SecurityAssociation" ThisKey="OrganisationID" OtherKey="OrganisationID" Type="SecurityAssociation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecurityGroupName" Member="SecurityGroupNames">
+    <Type Name="SecurityGroupName">
+      <Column Name="SecurityGroupNameID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SecurityGroupName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="SecurityGroup_SecurityGroupName" Member="SecurityGroup" ThisKey="SecurityGroupNameID" OtherKey="SecurityGroupNameID" Type="SecurityGroup" IsForeignKey="true" />
+      <Association Name="SecurityAssociation_SecurityGroupName" Member="SecurityAssociation" ThisKey="SecurityGroupNameID" OtherKey="SecurityGroupNameID" Type="SecurityAssociation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecurityGroup" Member="SecurityGroups">
+    <Type Name="SecurityGroup">
+      <Column Name="SecurityGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SecurityGroupNameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SecurityGroup_SecurityGroupName" Member="SecurityGroupNames" ThisKey="SecurityGroupNameID" OtherKey="SecurityGroupNameID" Type="SecurityGroupName" />
+      <Association Name="SecurityGroup_EmployeeNameIDView" Member="EmployeeNameIDViews" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="EmployeeNameIDView" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmployeeNameIDView" Member="EmployeeNameIDViews">
+    <Type Name="EmployeeNameIDView">
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(101)" CanBeNull="true" />
+      <Column Name="SecurityGroupID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SecurityGroupNameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SecurityGroup_EmployeeNameIDView" Member="SecurityGroup" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="SecurityGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecurityAssociation" Member="SecurityAssociations">
+    <Type Name="SecurityAssociation">
+      <Column Name="SecurityAssociationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SecurityGroupNameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SecurityAssociation_OrganisationDetail" Member="OrganisationDetails" ThisKey="OrganisationID" OtherKey="OrganisationID" Type="OrganisationDetail" />
+      <Association Name="SecurityAssociation_SecurityGroupName" Member="SecurityGroupNames" ThisKey="SecurityGroupNameID" OtherKey="SecurityGroupNameID" Type="SecurityGroupName" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecurityAssociationOrganisationView" Member="SecurityAssociationOrganisationViews">
+    <Type Name="SecurityAssociationOrganisationView">
+      <Column Name="AccountIdName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SecurityGroupNameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SecurityGroupName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sites" Member="Sites">
+    <Type Name="Site">
+      <Column Name="SiteID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SiteDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SiteInternalDomain" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="SiteName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="OrganisationDetail_Site" Member="OrganisationDetail" ThisKey="OrganisationID" OtherKey="OrganisationID" Type="OrganisationDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecurityAssociationEmployeeView" Member="SecurityAssociationEmployeeViews">
+    <Type Name="SecurityAssociationEmployeeView">
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccountIdName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubnetType" Member="SubnetTypes">
+    <Type Name="SubnetType">
+      <Column Name="SubnetTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubnetType" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Subnet_SubnetType" Member="Subnet" ThisKey="SubnetTypeID" OtherKey="SubnettypeID" Type="Subnet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NIC" Member="NICs">
+    <Type Name="NIC">
+      <Column Name="nicID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressIPV4" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AddressIPV6" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SubnetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Subnet_NIC" Member="Subnet" ThisKey="SubnetID" OtherKey="SubnetID" Type="Subnet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Subnet" Member="Subnets">
+    <Type Name="Subnet">
+      <Column Name="SubnetID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SiteID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubnettypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubnetDescription" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DefaultGW" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Column Name="DNS1" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Column Name="DNS2" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Column Name="NetMask" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Association Name="Subnet_SubnetType" Member="SubnetTypes" ThisKey="SubnettypeID" OtherKey="SubnetTypeID" Type="SubnetType" />
+      <Association Name="Subnet_NIC" Member="NICs" ThisKey="SubnetID" OtherKey="SubnetID" Type="NIC" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DeviceStatus" Member="DeviceStatus">
+    <Type Name="DeviceStatus">
+      <Column Name="DeviceStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeviceStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DeviceOrganisationSiteParentView" Member="DeviceOrganisationSiteParentViews">
+    <Type Name="DeviceOrganisationSiteParentView">
+      <Column Name="ModelNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ThirdPartyDetails" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Specification" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="HostName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="SiteName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="AccountIdName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DeviceStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ParentDevice" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ParentDeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CredentialsType" Member="CredentialsTypes">
+    <Type Name="CredentialsType">
+      <Column Name="CredentialsTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CredentialsType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Credential_CredentialsType" Member="Credential" ThisKey="CredentialsTypeID" OtherKey="CredentialsTypeID" Type="Credential" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Credentials" Member="Credentials">
+    <Type Name="Credential">
+      <Column Name="CredentialsID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CredentialsTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OperatingSystemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DeviceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Account" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Credential_CredentialsType" Member="CredentialsTypes" ThisKey="CredentialsTypeID" OtherKey="CredentialsTypeID" Type="CredentialsType" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Device" Member="Devices">
+    <Type Name="Device">
+      <Column Name="DeviceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ModelNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ThirdPartyDetails" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Specification" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DeviceStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SiteID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentDeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HostName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="OperatingSystemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Device_OperatingSystem" Member="OperatingSystems" ThisKey="OperatingSystemID" OtherKey="OperatingSystemID" Type="OperatingSystem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OperatingSystem" Member="OperatingSystems">
+    <Type Name="OperatingSystem">
+      <Column Name="OperatingSystemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OperatingSystem" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Device_OperatingSystem" Member="Device" ThisKey="OperatingSystemID" OtherKey="OperatingSystemID" Type="Device" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DeviceDeviceStatusView" Member="DeviceDeviceStatusViews">
+    <Type Name="DeviceDeviceStatusView">
+      <Column Name="DeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ModelNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ThirdPartyDetails" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Specification" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DeviceStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SiteID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentDeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HostName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="OperatingSystemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DeviceStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SiteName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="OperatingSystem" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

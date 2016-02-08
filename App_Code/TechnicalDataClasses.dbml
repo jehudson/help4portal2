@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="support" Class="TechnicalDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=annatto.help4it.local\annatto;Initial Catalog=support;Persist Security Info=True;User ID=help4base" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="supportConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.OrganisationDetails" Member="OrganisationDetails">
+    <Type Name="OrganisationDetail">
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountIdName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OrganisationDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Inactive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SelectOrganisationIDByEmployeeIDView" Member="SelectOrganisationIDByEmployeeIDViews">
+    <Type Name="SelectOrganisationIDByEmployeeIDView">
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccountIdName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Device" Member="Devices">
+    <Type Name="Device">
+      <Column Name="DeviceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ModelNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Specification" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DeviceStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DeviceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentDeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExternalSubnetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InternalSubnetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SiteID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExternalIP" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Column Name="InternalIP" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Column Name="HostName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DeviceDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OperatingSystemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ThirdPartyDetails" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DeviceOrganisationSiteParentView" Member="DeviceOrganisationSiteParentViews">
+    <Type Name="DeviceOrganisationSiteParentView">
+      <Column Name="ModelNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ThirdPartyDetails" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Specification" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="HostName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SiteName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ParentDeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OrganisationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DeviceStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ParentHostName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DeviceStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DeviceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

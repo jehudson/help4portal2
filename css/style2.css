@@ -1,0 +1,80 @@
+﻿#dateweek {
+    font-size:large;
+}
+.smallwarning {
+    color:red;
+}
+
+.information {
+    color: blue;
+}
+
+.mainmenu-hidden {
+    display: none;
+}
+
+.mainmenu-show {
+    display: block;
+}
+
+.control-hidden {
+    display: none;
+}
+
+.control-show {
+    display: block;
+}
+#newdevicesform {
+text-align:left;
+}
+#NewNicTable {
+    text-align:left;
+}
+.deactivatedevicetable {
+    width: 385px;
+}
+.deactivatedevicetable thead {
+	background: url("../img/tables/table-head-bg.png") repeat-x scroll top left #dddddd;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.deactivatedevicetable thead th:first-child {
+	border-left: none;
+}
+
+.deactivatedevicetable thead th:last-child {
+	border-right: none;
+}
+
+.deactivatedevicetable thead th {
+	vertical-align: middle;
+	text-align: left;
+	padding: 8px 13px;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #c3c3c3;
+	cursor: pointer;
+}
+
+.deactivatedevicetable tbody th, .table tbody td, .table tfoot th, .table tfoot td {
+	vertical-align: top;
+	text-align: left;
+	padding: 7px;
+	border-left: 1px dotted #bebebe;
+}
+
+.deactivatedevicetable tbody td {
+	background: #f2f2f2;
+}
+
+.deactivatedevicetable tbody th:first-child, .table tbody .th:first-child, .table tbody td:first-child, .table tfoot th:first-child, .table tfoot td:first-child {
+	border-left: none;
+}
+
+.deactivatedevicetable tbody tr.even td {
+	background: #e6e6e6;
+}
+
+.deactivatedevicetable tbody tr:hover th, .table tbody tr:hover .th, .table tbody tr:hover td {
+	background: #d8dce6;
+}

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap>
+  <siteMapNode title="Home" >
+    <siteMapNode title="Services" >
+      <siteMapNode title="Training" url="~/Training.aspx"/>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
